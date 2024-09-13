@@ -42,6 +42,7 @@ if [[ "$update_dns" =~ ^[Yy]$ ]]; then
         "aiproxy.laizn.com"
         "nas.laizn.com"
         "aiweb-admin.laizn.com"
+        "vaultwarden.laizn.com"   # Added new domain
     )
 
     # Get the public IP address
@@ -145,6 +146,7 @@ cp ./nginx_configs/files.laizn.com.conf /etc/nginx/sites-available/files.laizn.c
 cp ./nginx_configs/nas.laizn.com.conf /etc/nginx/sites-available/nas.laizn.com
 cp ./nginx_configs/laizn.com.conf /etc/nginx/sites-available/laizn.com
 cp ./nginx_configs/default.conf /etc/nginx/sites-available/default
+cp ./nginx_configs/vaultwarden.laizn.com.conf /etc/nginx/sites-available/vaultwarden.laizn.com  # Added line
 
 # Ensure the .htpasswd file exists for nas.laizn.com
 echo "Setting up basic authentication for nas.laizn.com..."
@@ -161,6 +163,7 @@ ln -sf /etc/nginx/sites-available/files.laizn.com /etc/nginx/sites-enabled/
 ln -sf /etc/nginx/sites-available/nas.laizn.com /etc/nginx/sites-enabled/
 ln -sf /etc/nginx/sites-available/laizn.com /etc/nginx/sites-enabled/
 ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/
+ln -sf /etc/nginx/sites-available/vaultwarden.laizn.com /etc/nginx/sites-enabled/  # Added line
 
 # Test Nginx configuration and reload
 nginx -t && systemctl reload nginx
@@ -172,5 +175,6 @@ certbot --nginx -d aiweb.laizn.com --non-interactive --agree-tos -m laizenan@gma
 certbot --nginx -d files.laizn.com --non-interactive --agree-tos -m laizenan@gmail.com --redirect
 certbot --nginx -d nas.laizn.com --non-interactive --agree-tos -m laizenan@gmail.com --redirect
 certbot --nginx -d laizn.com --non-interactive --agree-tos -m laizenan@gmail.com --redirect
+certbot --nginx -d vaultwarden.laizn.com --non-interactive --agree-tos -m laizenan@gmail.com --redirect  # Added line
 
 echo "Setup complete!"
